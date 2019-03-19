@@ -15,7 +15,8 @@ export default {
 <style lang="scss" scoped>
   .side-bar{
     width: 300px;
-    margin-top: 30px;
+    box-sizing: border-box;
+    float: left;
   }
   .block{
     padding: 30px;

@@ -1,2 +1,8 @@
 $border: #f0f0f0;
 $background: #eee;
+$tag-color: #fdd07c;
+
+// mixin
+@mixin navActive{
+  color: rgb(46, 222, 253);
+}

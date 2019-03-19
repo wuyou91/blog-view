@@ -4,11 +4,18 @@
       <h2>{{article.title}}</h2>
     </div>
     <div class="content">
+      <div class="date">
+        <span><i class="iconfont icon-profile"></i>乌酉</span>
+        <span><i class="iconfont icon-time"></i>{{article.date_string}}</span>
+        <span><i class="iconfont icon-attention"></i>{{article.clicks}}</span>
+        <span><i class="iconfont icon-like"></i>{{article.stars}}</span>
+      </div>
       <ul class="tags">
-        <li v-for="(item, index) in article.tags" :key="index">{{item}}</li>
+        <li v-for="(tag, index) in article.tags" :key="index">
+          {{tag}}
+        </li>
       </ul>
-      <div class="date">发布时间{{article.date_string}}</div>
-      <div v-html = article.html></div>
+      <div class="article-text" v-html = article.html></div>
     </div>
   </div>
 </template>
@@ -38,6 +45,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../style/variable.scss';
 .article{
   background: #fff;
 }
@@ -61,5 +69,31 @@ export default {
 }
 .content{
   padding: 60px 48px;
+  .date{
+    font-size: 14px;
+    color: #748594;
+    &>span{
+      margin-right: 25px;
+      i{
+        margin-right: 5px;
+      }
+    }
+  }
+  .tags{
+    margin-top: 20px;
+    overflow: hidden;
+    li{
+      float: left;
+      height: 18px;
+      padding: 2px 10px;
+      margin-right: 8px;
+      border-radius: 10px;
+      background: $tag-color;
+      font-size: 12px;
+    }
+  }
+  .article-text{
+    margin-top: 40px;
+  }
 }
 </style>

@@ -5,8 +5,18 @@
       </div>
       <div class="text">
         <div class="title">{{item.title}}</div>
-        <div class="date">{{item.date_string}}</div>
-        <div class="desc">{{item.desc}}</div>
+        <div class="date">
+          <span><i class="iconfont icon-profile"></i>乌酉</span>
+          <span><i class="iconfont icon-time"></i>{{item.date_string}}</span>
+          <span><i class="iconfont icon-attention"></i>{{item.clicks}}</span>
+          <span><i class="iconfont icon-like"></i>{{item.stars}}</span>
+        </div>
+        <div class="desc">{{item.desc.slice(0,60)}}...</div>
+        <ul class="tags">
+          <li v-for="(tag, index) in item.tags" :key="index">
+            {{tag}}
+          </li>
+        </ul>
       </div>
     </li>
   </ul>
@@ -44,6 +54,7 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@import '../style/variable.scss';
   .list-item{
     display: flex;
     padding: 30px;
@@ -51,8 +62,9 @@ export default {
     background: #fff;
     cursor: pointer;
     .cover{
+      flex-shrink: 0;
       width: 200px;
-      height: 120px;
+      height: 155px;
       background-position: center;
       background-size: cover;
       background-repeat: no-repeat;
@@ -68,11 +80,31 @@ export default {
     .date{
       font-size: 14px;
       color: #bbb;
+      &>span{
+        margin-right: 25px;
+        i{
+          margin-right: 5px;
+        }
+      }
     }
     .desc{
       font-size: 14px;
       margin-top: 10px;
       color: #999;
+    }
+    .tags{
+      margin-top: 20px;
+      overflow: hidden;
+      li{
+        float: left;
+        height: 18px;
+        padding: 2px 10px;
+        margin-right: 8px;
+        border-radius: 10px;
+        background: $tag-color;
+        font-size: 12px;
+
+      }
     }
   }
 

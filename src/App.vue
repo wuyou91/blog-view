@@ -25,12 +25,13 @@ export default {
 @import './style/base.scss';
 .main{
   width: 1080px;
-  margin: 0 auto;
+  margin: 30px auto 60px auto;
   display: flex;
   justify-content: space-between;
   .main-content{
-    margin: 30px 30px 0 0;
-    flex-grow: 1;
+    margin-right: 30px;
+    width: 750px;
+    // flex-grow: 1;
   }
 }
 </style>
