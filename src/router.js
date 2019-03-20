@@ -1,46 +1,72 @@
 import Vue from 'vue';
 import Router from 'vue-router';
-import articleList from './components/articleList.vue';
+import home from './views/home.vue';
 import article from './views/article.vue';
+import articleContent from './views/articleContent.vue';
 import NotFound from './components/404.vue';
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
     {
       path: '/',
+      redirect: '/home',
+    },
+    {
+      path: '/home',
       name: 'home',
-      component: articleList,
+      component: home,
+      meta: {
+        title: '首页',
+      },
     },
     {
       path: '/about',
       name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/about.vue'),
+      component: () => import('./views/about.vue'),
+      meta: {
+        title: '关于',
+      },
     },
     {
       path: '/photos',
       name: 'photos',
       component: () => import('./views/photos.vue'),
+      meta: {
+        title: '摄影',
+      },
     },
     {
       path: '/article',
-      name: 'articleList',
-      component: articleList,
+      name: 'article',
+      component: article,
+      meta: {
+        title: '文章',
+      },
     },
     {
       path: '/article/:article_id',
-      name: 'article',
-      component: article,
+      name: 'articleContent',
+      component: articleContent,
+      meta: {
+        title: '文章列表',
+      },
     },
     {
       path: '*',
       component: NotFound,
+      meta: {
+        title: '404',
+      },
     },
   ],
 });
+
+router.beforeEach((to, from, next) => {
+  document.title = to.meta.title || '乌酉空间';
+  next();
+});
+export default router;

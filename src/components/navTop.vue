@@ -1,6 +1,6 @@
 <template>
   <nav>
-    <div class="container">
+    <div class="main">
       <div class="brand">这是标题</div>
       <ul class="nav-list">
         <li v-for= "(item, index) in navList" :key="index" @click="handleClick(item.router)" :class="{active: currentPage === item.router}">{{item.name}}</li>
@@ -14,10 +14,10 @@ export default {
   data() {
     return {
       navList: [
-        {router: 'home', name: '首页'},
-        {router: 'article', name: '文章'},
-        {router: 'photos', name: '光影'},
-        {router: 'about', name: '关于'}
+        {router: '/home', name: '首页'},
+        {router: '/article', name: '文章'},
+        {router: '/photos', name: '光影'},
+        {router: '/about', name: '关于'}
       ]
     }
   },
@@ -42,19 +42,18 @@ nav{
   background: #fff;
   border-bottom: 1px solid $border;;
 }
-.container{
-  width: 1080px;
-  margin: 0 auto;
-  .brand{
+.brand{
+  float: left;
+}
+.nav-list{
+  float: left;
+  overflow: hidden;
+  li{
     float: left;
-  }
-  .nav-list{
-    float: left;
-    overflow: hidden;
-    li{
-      float: left;
-      margin-left: 20px;
-    }
+    line-height: 100px;
+    padding: 0 15px;
+    font-size: 20px;
+    cursor: pointer;
   }
 }
 .active{

@@ -36,6 +36,7 @@ export default {
   },
   created() {
     this.getArticle(this.page, this.limit)
+    this.$store.commit('changePage', this.$route.path)  
   },
   methods: {
     async getArticle(page,limit) {
@@ -47,7 +48,7 @@ export default {
       this.articleList = res.data.data
     },
     toArticle(id) {
-      this.$router.push({name: 'article', params: { article_id: id }})
+      this.$router.push({name: 'articleContent', params: { article_id: id }})
     }
   }
 };
@@ -55,58 +56,58 @@ export default {
 
 <style lang="scss" scoped>
 @import '../style/variable.scss';
-  .list-item{
-    display: flex;
-    padding: 30px;
-    margin-bottom: 30px;
-    background: #fff;
-    cursor: pointer;
-    .cover{
-      flex-shrink: 0;
-      width: 200px;
-      height: 155px;
-      background-position: center;
-      background-size: cover;
-      background-repeat: no-repeat;
-    }
+.list-item{
+  display: flex;
+  padding: 30px;
+  margin-bottom: 30px;
+  background: #fff;
+  cursor: pointer;
+  .cover{
+    flex-shrink: 0;
+    width: 200px;
+    height: 155px;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
   }
-  .text{
-    margin-left: 20px;
-    line-height: 1.5;
-    .title{
-      font-size: 18px;
-      margin-bottom: 10px;
-    }
-    .date{
-      font-size: 14px;
-      color: #bbb;
-      &>span{
-        margin-right: 25px;
-        i{
-          margin-right: 5px;
-        }
+}
+.text{
+  margin-left: 20px;
+  line-height: 1.5;
+  .title{
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  .date{
+    font-size: 14px;
+    color: #bbb;
+    &>span{
+      margin-right: 25px;
+      i{
+        margin-right: 5px;
       }
     }
-    .desc{
-      font-size: 14px;
-      margin-top: 10px;
-      color: #999;
-    }
-    .tags{
-      margin-top: 20px;
-      overflow: hidden;
-      li{
-        float: left;
-        height: 18px;
-        padding: 2px 10px;
-        margin-right: 8px;
-        border-radius: 10px;
-        background: $tag-color;
-        font-size: 12px;
+  }
+  .desc{
+    font-size: 14px;
+    margin-top: 10px;
+    color: #999;
+  }
+  .tags{
+    margin-top: 20px;
+    overflow: hidden;
+    li{
+      float: left;
+      height: 18px;
+      padding: 2px 10px;
+      margin-right: 8px;
+      border-radius: 10px;
+      background: $tag-color;
+      font-size: 12px;
 
-      }
     }
   }
+}
 
 </style>
 

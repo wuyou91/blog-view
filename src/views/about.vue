@@ -7,12 +7,8 @@
 <script>
 export default {
   created() {
-this.$store.commit('changePage', 'about')  },
-  methods: {
-    change() {
-      
-    }
-  }
+    this.$store.commit('changePage', this.$route.path)  
+  },
 }
 </script>
 
