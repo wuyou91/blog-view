@@ -1,9 +1,10 @@
 <template>
   <nav>
     <div class="main">
-      <div class="brand">这是标题</div>
+      <div class="brand"><img src="../assets/logo.png" alt=""></div>
       <ul class="nav-list">
         <li v-for= "(item, index) in navList" :key="index" @click="handleClick(item.router)" :class="{active: currentPage === item.router}">{{item.name}}</li>
+        <li><a href="">项目</a></li>
       </ul>
     </div>
   </nav>
@@ -43,7 +44,13 @@ nav{
   border-bottom: 1px solid $border;;
 }
 .brand{
+  height: 50px;
   float: left;
+  img{
+    height: 100%;
+    display: block;
+    margin: 25px 20px 25px 0;
+  }
 }
 .nav-list{
   float: left;
@@ -54,6 +61,9 @@ nav{
     padding: 0 15px;
     font-size: 20px;
     cursor: pointer;
+    a{
+      color: #000;
+    }
   }
 }
 .active{

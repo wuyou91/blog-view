@@ -1,25 +1,24 @@
 <template>
-  <ul class="article-list">
-    <li class="hs list-item" v-for="item in articleList" :key="item.id" @click="toArticle(item.id)">
-      <div class="cover" :style="{backgroundImage: 'url(' + imgBase + item.cover + ')'}">
-      </div>
-      <div class="text">
-        <div class="title">{{item.title}}</div>
-        <div class="date">
-          <span><i class="iconfont icon-profile"></i>乌酉</span>
-          <span><i class="iconfont icon-time"></i>{{item.date_string}}</span>
-          <span><i class="iconfont icon-attention"></i>{{item.clicks}}</span>
-          <span><i class="iconfont icon-like"></i>{{item.stars}}</span>
+  <div class="list">
+    <ul class="article-list">
+      <li class="hs list-item" v-for="item in articleList" :key="item.id" @click="toArticle(item.id)">
+        <div class="cover" :style="{backgroundImage: 'url(' + imgBase + item.cover + ')'}">
         </div>
-        <div class="desc">{{item.desc.slice(0,60)}}...</div>
-        <ul class="tags">
-          <li v-for="(tag, index) in item.tags" :key="index">
-            {{tag}}
-          </li>
-        </ul>
-      </div>
-    </li>
-  </ul>
+        <div class="text">
+          <div class="title">{{item.title}}</div>
+          <div class="desc">{{item.desc.slice(0,90)}}...</div>
+          <div class="date">
+            <span><i class="iconfont icon-fenlei"></i>{{item.classify}}</span>
+            <span><i class="iconfont icon-profile"></i>乌酉</span>
+            <span><i class="iconfont icon-time"></i>{{item.date_string}}</span>
+            <span><i class="iconfont icon-attention"></i>{{item.clicks}}</span>
+            <span><i class="iconfont icon-like"></i>{{item.stars}}</span>
+          </div>
+        </div>
+      </li>
+    </ul>
+    <div class="add-more" @click="addMoreArticle">{{more}}</div>
+  </div>
 </template>
 
 <script>
@@ -29,23 +28,38 @@ export default {
   data() {
     return {
       page: 1,
-      limit: 10,
+      limit: 5,
       articleList: [],
+      more: '点击加载更多',
+      hasArticle: true,
       imgBase: config.imgBase
     }
   },
   created() {
-    this.getArticle(this.page, this.limit)
+    this.getArticle()
     this.$store.commit('changePage', this.$route.path)  
   },
   methods: {
-    async getArticle(page,limit) {
+    async getArticle() {
       const parameter = {
-        page,
-        limit
+        page:this.page,
+        limit:this.limit
       }
       const res = await http.getArticleList(parameter)
-      this.articleList = res.data.data
+      this.articleList.push(...res.data.data)
+      this.page++
+      console.log(this.articleList.length)
+      if(this.articleList.length >= res.data.total){
+        this.more = '没有更多文章了'
+        this.hasArticle = false
+      }
+    },
+    addMoreArticle(){
+      if(this.hasArticle){
+        this.getArticle()
+      }else{
+        return   
+      }
     },
     toArticle(id) {
       this.$router.push({name: 'articleContent', params: { article_id: id }})
@@ -64,7 +78,7 @@ export default {
   cursor: pointer;
   .cover{
     flex-shrink: 0;
-    width: 200px;
+    width: 250px;
     height: 155px;
     background-position: center;
     background-size: cover;
@@ -72,15 +86,17 @@ export default {
   }
 }
 .text{
-  margin-left: 20px;
+  margin-left: 40px;
   line-height: 1.5;
   .title{
-    font-size: 18px;
+    font-size: 24px;
     margin-bottom: 10px;
+    color: $title;
   }
   .date{
     font-size: 14px;
     color: #bbb;
+    margin-top: 20px;
     &>span{
       margin-right: 25px;
       i{
@@ -93,21 +109,13 @@ export default {
     margin-top: 10px;
     color: #999;
   }
-  .tags{
-    margin-top: 20px;
-    overflow: hidden;
-    li{
-      float: left;
-      height: 18px;
-      padding: 2px 10px;
-      margin-right: 8px;
-      border-radius: 10px;
-      background: $tag-color;
-      font-size: 12px;
-
-    }
-  }
 }
-
+.add-more{
+  width: 150px;
+  margin: 10px auto 20px auto;
+  text-align: center;
+  color: $title;
+  cursor: pointer;
+}
 </style>
 

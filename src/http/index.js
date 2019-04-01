@@ -8,4 +8,10 @@ export default {
   getArticle(data) {
     return axios.get(`${config.API_BASE}/article/${data}`);
   },
+  getHotArticle() {
+    return axios.get(`${config.API_BASE}/article/hotArticle`);
+  },
+  getVisitorCount(){
+    return axios.get(`${config.API_BASE}/admin/visitorCount`);
+  }
 };
