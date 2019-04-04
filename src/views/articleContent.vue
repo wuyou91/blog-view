@@ -9,8 +9,8 @@
           <span><i class="iconfont icon-fenlei"></i>{{article.classify}}</span>
           <span><i class="iconfont icon-profile"></i>乌酉</span>
           <span><i class="iconfont icon-time"></i>{{article.date_string}}</span>
-          <span><i class="iconfont icon-attention"></i>{{article.clicks}}</span>
-          <span><i class="iconfont icon-like" @click="addStar(article.id)"></i>{{article.stars}}</span>
+          <span><i class="iconfont icon-yanjing"></i>{{article.clicks}}</span>
+          <span><i class="iconfont icon-likefill star-like" :class="{star:hasStar}" @click="addStar(article.id)"></i>{{article.stars}}</span>
         </div>
         <div class="article-text" v-html = article.html></div>
       </div>
@@ -32,7 +32,8 @@ export default {
   data() {
     return {
       article: {},
-      imgBase: config.imgBase
+      imgBase: config.cdn+'/image/',
+      hasStar:false
     }
   },
    watch: {
@@ -45,10 +46,31 @@ export default {
     getArticle() {
       http.getArticle(this.$route.params.article_id).then((res) => {
         this.article = res.data.data
+        if(localStorage.getItem(String(res.data.data.id))){
+          this.hasStar = true
+        }
       })
     },
     addStar(articleId){
-      console.log(articleId)
+      const type = localStorage.getItem(String(articleId)) ? 'unstar' : 'star'
+      http.star({
+        type,
+        id: articleId
+      }).then((res) => {
+          if(res.data.status===1){
+            if(type==='star'){
+              this.article.stars++
+              localStorage.setItem(String(articleId), 'star');
+              this.hasStar = true
+            }else{
+              this.article.stars--
+              localStorage.removeItem(String(articleId));
+              this.hasStar = false
+            }
+          }else{
+            console.log(res.data.message)
+          }
+      })
     }
   }
 }
@@ -91,9 +113,15 @@ export default {
         margin-right: 5px;
       }
     }
+    .star{
+      color:red;
+    }
   }
   .article-text{
     margin-top: 40px;
   }
+}
+.star-like{
+  cursor: pointer;
 }
 </style>

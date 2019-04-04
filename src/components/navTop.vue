@@ -4,7 +4,7 @@
       <div class="brand"><img src="../assets/logo.png" alt=""></div>
       <ul class="nav-list">
         <li v-for= "(item, index) in navList" :key="index" @click="handleClick(item.router)" :class="{active: currentPage === item.router}">{{item.name}}</li>
-        <li><a href="">项目</a></li>
+        <li><a href="http://www.yancx.cn/DEMO/">项目</a></li>
       </ul>
     </div>
   </nav>

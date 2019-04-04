@@ -9,6 +9,7 @@
         <a href="//github.com/wuyou91"><i class="iconfont icon-GitHub"></i></a>
         <a href="//www.weibo.com/ycx1991"><i class="iconfont icon-weibo-circle"></i></a>
       </div>
+      <router-link to="/about" style="font-size:12px; color:#999;">了解更多</router-link>
     </div>
     <div class="block hs music">
       <aplayer autoplay :music="music"/>
@@ -44,12 +45,12 @@ export default {
   data() {
     return {
       hotArticle: [],
-      avatar: config.imgBase + 'default_avatar.jpg',
+      avatar: config.cdn + '/image/default_avatar.jpg',
       music: {
         title: '猎户星座',
         artist: '朴树',
-        src: config.API_BASE + '/media/lhxz.mp3',
-        pic: config.API_BASE + '/media/lhxz.jpg'
+        src: config.cdn + '/audio/lhxz.mp3',
+        pic: config.cdn + '/audio/lhxz.jpg'
       }
     }
   },

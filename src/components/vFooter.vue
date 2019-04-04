@@ -1,8 +1,9 @@
 <template>
     <div class="footer">
         <p>访客统计 {{visitorCount}}</p>
-        <p>Copyright ©2019 乌酉 版权所有</p>
-        <p>本站由 阿里云 提供计算与安全服务，感谢 七牛云 提供CDN服务</p>
+        <p>Copyright ©2019 yancx.cn 版权所有 <a href="http://www.miitbeian.gov.cn/">粤ICP备19032467号</a></p>
+        <p></p>
+        <p>感谢 <a href="https://www.qiniu.com/">七牛云</a> 提供CDN服务</p>
     </div>
 </template>
 
@@ -17,7 +18,6 @@ export default {
     created(){
         http.getVisitorCount().then((res) => {
             this.visitorCount = res.data.data[0].count
-            console.log(res)
         })
     }
 }
@@ -26,12 +26,19 @@ export default {
 <style lang="scss" scoped>
     .footer{
         width: 100%;
-        padding: 30px 0 20px 0;
+        padding: 40px 0 20px 0;
         background: #2d3237;
         color: #6b6e81;
         p{
             text-align: center;
             font-size: 12px;
+            a{
+                color: #6b6e81;
+                transition: all .2s linear;
+                &:hover{
+                    color: #999;
+                }
+            }
         }
     }
     

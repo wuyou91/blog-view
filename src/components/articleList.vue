@@ -2,8 +2,7 @@
   <div class="list">
     <ul class="article-list">
       <li class="hs list-item" v-for="item in articleList" :key="item.id" @click="toArticle(item.id)">
-        <div class="cover" :style="{backgroundImage: 'url(' + imgBase + item.cover + ')'}">
-        </div>
+        <div class="cover" :style="{backgroundImage: 'url(' + imgBase + item.cover + ')'}"></div>
         <div class="text">
           <div class="title">{{item.title}}</div>
           <div class="desc">{{item.desc.slice(0,90)}}...</div>
@@ -11,8 +10,8 @@
             <span><i class="iconfont icon-fenlei"></i>{{item.classify}}</span>
             <span><i class="iconfont icon-profile"></i>乌酉</span>
             <span><i class="iconfont icon-time"></i>{{item.date_string}}</span>
-            <span><i class="iconfont icon-attention"></i>{{item.clicks}}</span>
-            <span><i class="iconfont icon-like"></i>{{item.stars}}</span>
+            <span><i class="iconfont icon-yanjing"></i>{{item.clicks}}</span>
+            <span><i class="iconfont icon-likefill"></i>{{item.stars}}</span>
           </div>
         </div>
       </li>
@@ -32,7 +31,7 @@ export default {
       articleList: [],
       more: '点击加载更多',
       hasArticle: true,
-      imgBase: config.imgBase
+      imgBase: config.cdn+'/image/'
     }
   },
   created() {
@@ -50,13 +49,16 @@ export default {
       this.page++
       console.log(this.articleList.length)
       if(this.articleList.length >= res.data.total){
-        this.more = '没有更多文章了'
+        this.more = '没有更多文章了╮(﹀_﹀”)╭'
         this.hasArticle = false
+      }else{
+        this.more = "点击加载更多"
       }
     },
     addMoreArticle(){
       if(this.hasArticle){
         this.getArticle()
+        this.more = "加载中..."
       }else{
         return   
       }
@@ -111,8 +113,8 @@ export default {
   }
 }
 .add-more{
-  width: 150px;
-  margin: 10px auto 20px auto;
+  width: 100%;
+  margin: 10px auto;
   text-align: center;
   color: $title;
   cursor: pointer;

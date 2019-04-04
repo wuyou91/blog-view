@@ -13,5 +13,8 @@ export default {
   },
   getVisitorCount(){
     return axios.get(`${config.API_BASE}/admin/visitorCount`);
-  }
+  },
+  star(data) {
+    return axios.get(`${config.API_BASE}/article/star`, { params: data });
+  },
 };

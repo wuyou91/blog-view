@@ -23,7 +23,7 @@ export default {
   },
   data() {
     return {
-      imgBase:config.imgBase,
+      imgBase:config.cdn+'/image/',
       swiperOption: {
         slidesPerView : 3,
         spaceBetween : 20,
