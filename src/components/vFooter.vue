@@ -2,7 +2,6 @@
     <div class="footer">
         <p>访客统计 {{visitorCount}}</p>
         <p>Copyright ©2019 yancx.cn 版权所有 <a href="http://www.miitbeian.gov.cn/">粤ICP备19032467号</a></p>
-        <p></p>
         <p>感谢 <a href="https://www.qiniu.com/">七牛云</a> 提供CDN服务</p>
     </div>
 </template>
