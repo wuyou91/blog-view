@@ -32,7 +32,7 @@ export default {
   data() {
     return {
       article: {},
-      imgBase: config.cdn+'/image/',
+      imgBase: config.cdn,
       hasStar:false
     }
   },
@@ -46,6 +46,7 @@ export default {
     getArticle() {
       http.getArticle(this.$route.params.article_id).then((res) => {
         this.article = res.data.data
+        document.title = res.data.data.title
         if(localStorage.getItem(String(res.data.data.id))){
           this.hasStar = true
         }
@@ -116,9 +117,6 @@ export default {
     .star{
       color:red;
     }
-  }
-  .article-text{
-    margin-top: 40px;
   }
 }
 .star-like{

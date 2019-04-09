@@ -44,16 +44,13 @@ const router = new Router({
       name: 'article',
       component: article,
       meta: {
-        title: '文章',
+        title: '文章列表',
       },
     },
     {
       path: '/article/:article_id',
       name: 'articleContent',
-      component: articleContent,
-      meta: {
-        title: '文章列表',
-      },
+      component: articleContent
     },
     {
       path: '*',
@@ -66,7 +63,7 @@ const router = new Router({
 });
 
 router.beforeEach((to, from, next) => {
-  document.title = to.meta.title || '乌酉空间';
+  document.title = to.meta.title || '延长线';
   next();
 });
 export default router;

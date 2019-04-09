@@ -12,7 +12,7 @@
       <router-link to="/about" style="font-size:12px; color:#999;">了解更多</router-link>
     </div>
     <div class="block hs music">
-      <aplayer autoplay :music="music"/>
+      <aplayer autoplay :music="music" :list="musicList" repeat="repeat-all"/>
     </div>
     <div class="block hs hot-artical">
       <h4 class="sub-title">热门文章</h4>
@@ -20,12 +20,6 @@
         <li v-for="item in hotArticle" :key="item.id" @click="toArticle(item.id)">
           <div class="text">
             <div class="title">{{item.title}}</div>
-            <!-- <div class="date">
-              <span><i class="iconfont icon-profile"></i>乌酉</span>
-              <span><i class="iconfont icon-time"></i>{{item.date_string}}</span>
-              <span><i class="iconfont icon-attention"></i>{{item.clicks}}</span>
-              <span><i class="iconfont icon-like"></i>{{item.stars}}</span>
-            </div> -->
             <p class="desc">{{item.desc.slice(0,60)}}...</p>
           </div>
         </li>
@@ -49,9 +43,33 @@ export default {
       music: {
         title: '猎户星座',
         artist: '朴树',
-        src: config.cdn + '/audio/lhxz.mp3',
-        pic: config.cdn + '/audio/lhxz.jpg'
-      }
+        src: config.cdn + 'audio/lhxz.mp3',
+        pic: config.cdn + 'audio/lhxz.jpg'
+      },
+      musicList:[{
+        title: '猎户星座',
+        artist: '朴树',
+        src: config.cdn + 'audio/lhxz.mp3',
+        pic: config.cdn + 'audio/lhxz.jpg'
+      },
+      {
+        title: '清白之年',
+        artist: '朴树',
+        src: config.cdn + 'audio/qingbaizhinian.mp3',
+        pic: config.cdn + 'audio/lhxz.jpg'
+      },
+      {
+        title: 'Last Smile',
+        artist: 'LOVE PSYCHEDELICO',
+        src: config.cdn + 'audio/last_smile.mp3',
+        pic: config.cdn + 'audio/last_smile.jpg'
+      },
+      {
+        title: 'Pity in Her Eyes',
+        artist: '高橋諒',
+        src: config.cdn + 'audio/pity_in_her_eyes.mp3',
+        pic: config.cdn + 'audio/pity_in_her_eyes.jpg'
+      }]
     }
   },
   created(){

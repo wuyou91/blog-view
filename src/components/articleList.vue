@@ -31,7 +31,7 @@ export default {
       articleList: [],
       more: '点击加载更多',
       hasArticle: true,
-      imgBase: config.cdn+'/image/'
+      imgBase: config.cdn+ '/'
     }
   },
   created() {
@@ -47,7 +47,6 @@ export default {
       const res = await http.getArticleList(parameter)
       this.articleList.push(...res.data.data)
       this.page++
-      console.log(this.articleList.length)
       if(this.articleList.length >= res.data.total){
         this.more = '没有更多文章了╮(﹀_﹀”)╭'
         this.hasArticle = false

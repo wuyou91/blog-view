@@ -17,4 +17,7 @@ export default {
   star(data) {
     return axios.get(`${config.API_BASE}/article/star`, { params: data });
   },
+  getPhotoList(data) {
+    return axios.get(`${config.API_BASE}/photo/list`, { params: data });
+  }
 };
