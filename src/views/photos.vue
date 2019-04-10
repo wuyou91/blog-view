@@ -53,7 +53,7 @@ export default {
   mounted() {
     window.addEventListener('scroll', () => {
       var scrollTop = document.documentElement.scrollTop || document.body.scrollTop
-      if (scrollTop + document.body.clientHeight >= document.body.scrollHeight - 500) {
+      if (scrollTop + document.body.clientHeight >= document.body.scrollHeight - 200) {
         this.getData(this.page,this.limit)
       }
     })
