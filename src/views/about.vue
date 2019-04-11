@@ -1,7 +1,5 @@
 <template>
   <div class="about">
-    <div @click="print">打印</div>
-    <!--startprint-->
     <section>
       <h2>基础信息</h2>
       <ul>
@@ -48,12 +46,12 @@
     </section>
     <section>
       <h2 >工作经历</h2>
-      <h4>2018.07 ~ 2019.04</h4>
-      <p>在<strong>深圳法本信息技术有限公司</strong>担任<strong>前端开发</strong>，主要负责<strong>优必选企业官网和官方商城的开发和维护、以及活动营销H5页面和微信小程序开发。</strong></p>
-      <h4>2017.04 ~ 2018.06</h4>
-      <p>在<strong>深圳卓尔摄影器材有限公司</strong>担任<strong>前端开发</strong>，主要负责<strong>官方商城的开发和维护，以及日常专题活动页面的开发。</strong></p>
-      <h4>2014.07 ~ 2017.02</h4>
-      <p>分别在<strong>长沙千吉软装设计公司</strong>和<strong>长沙万物食品有限公司</strong>从事<strong>网页设计。</strong></p> 
+      <h4>2018.07 ~ 2019.03</h4>
+      <p>开发优必选企业官网及官方商城，以及营销活动页面H5及微信小程序等。</p>
+      <h4>2017.06 ~ 2018.05</h4>
+      <p>配合后端php工程师，运用bootstrap框架和jquery库开发网上商城的前端页面。</p>
+      <h4>2016.03 ~ 2017.04</h4>
+      <p>主要负责公司官网的设计和开发工作。设计网站页面，并编写html、css、javascrip代码t完成静态页面的开发，最后通过ftp工具上传到服务器。</p> 
     </section>
     <section>
       <h2>练习DEMO</h2>
