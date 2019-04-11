@@ -93,7 +93,7 @@ export default {
 @import '../style/variable.scss';
 
 .photos{
-  width: 100%;
+  min-width: 1200px;
   padding: 30px 0;
   .area{
     position: absolute;
