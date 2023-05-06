@@ -1,48 +1,95 @@
 @import './variable.scss';
 
-html,body{
+html,
+body {
   width: 100%;
   height: 100%;
   background: $background;
 }
 
-body,ul,p,h1,h2,h3,h4,h5,h6{
+body,
+ul,
+p,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
   margin: 0;
 }
-ul{
+
+ul {
   padding: 0;
 }
-input{
+
+input {
   background: transparent;
   border: 1px solid #ccc;
 }
-a{
-  text-decoration: none; 
+
+a {
+  text-decoration: none;
 }
-p{
+
+p {
   line-height: 1.5;
 }
-li{
+
+li {
   list-style-type: none;
 }
-// layout
-.main{
-  width: 1200px;
-  margin: 0 auto 30px auto;
-  display: flex;
-  .area-l{
-    width: 870px;
-    margin: 30px 30px 0 0;
-  }
-  .area-r{
-    width: 300px;
-    margin: 30px 0;
+
+// hovershadow
+.hs {
+  transition: box-shadow .3s linear;
+
+  &:hover {
+    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, .2);
   }
 }
-// hovershadow
-.hs{ 
-  transition: box-shadow .3s linear;
-  &:hover{
-    box-shadow: 0 2px 3px 0 rgba(0, 0, 0, .2);
+
+// layout
+.content-main {
+  display: flex;
+  max-width: $app-width;
+  box-sizing: border-box;
+  margin: 0 auto;
+  min-height: calc(100vh - 215px);
+
+  .area-l {
+    flex-grow: 1;
+    margin: 30px 0;
+    flex-shrink: 1;
+  }
+
+  .area-r {
+    margin: 30px 0 30px 30px;
+    flex-shrink: 0;
+  }
+}
+
+.nav-main {
+  display: flex;
+  max-width: $app-width;
+  box-sizing: border-box;
+  margin: 0 auto;
+  height: 100px;
+  align-items: center;
+}
+
+@media screen and(max-width: $app-width) {
+  .content-main {
+    width: 100%;
+  }
+
+  .nav-main {
+    width: 100%;
+  }
+}
+
+@media screen and(max-width: 680px) {
+  .area-r {
+    display: none;
   }
 }

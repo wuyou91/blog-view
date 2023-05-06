@@ -2,6 +2,7 @@
 node_modules
 /dist
 /blog
+/blog-view
 
 # local env files
 .env.local

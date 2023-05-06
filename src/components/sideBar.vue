@@ -1,26 +1,51 @@
 <template>
   <div class="side-bar">
     <div class="block hs info">
-      <img :src="avatar" alt="">
-      <h4>乌有Ryan</h4>
+      <img :src="avatar" alt="" />
+      <h4>乌酉Ryan</h4>
       <p>惜时，慎独。</p>
       <div>
-        <a href="mailto:ycx1991@live.com"><i class="iconfont icon-mail4"></i></a>
+        <a href="mailto:ycx1991@live.com"
+          ><i class="iconfont icon-mail4"></i
+        ></a>
         <a href="//github.com/wuyou91"><i class="iconfont icon-GitHub"></i></a>
-        <a href="//www.weibo.com/ycx1991"><i class="iconfont icon-weibo-circle"></i></a>
+        <a href="//www.weibo.com/ycx1991"
+          ><i class="iconfont icon-weibo-circle"></i
+        ></a>
       </div>
-      <router-link to="/about" style="font-size:12px; color:#999;">了解更多</router-link>
+      <router-link to="/about" style="font-size: 12px; color: #999"
+        >了解更多</router-link
+      >
     </div>
     <div class="block hs music">
-      <aplayer autoplay :music="music" :list="musicList" repeat="repeat-all"/>
+      <div id="aplayer"></div>
     </div>
     <div class="block hs hot-artical">
       <h4 class="sub-title">热门文章</h4>
       <ul class="hot-list">
-        <li v-for="item in hotArticle" :key="item.id" @click="toArticle(item.id)">
+        <li
+          v-for="item in hotArticle"
+          :key="item.id"
+          @click="toArticle(item.id)"
+        >
           <div class="text">
-            <div class="title">{{item.title}}</div>
-            <p class="desc">{{item.desc.slice(0,60)}}...</p>
+            <div class="title">{{ item.title }}</div>
+            <p class="desc">{{ item.desc.slice(0, 56) }}...</p>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="block hs hot-artical">
+      <h4 class="sub-title">热门标签</h4>
+      <ul class="tag-list">
+        <li
+          v-for="item in hotTag"
+          :key="item.name"
+          @click="findArticalByTag(item.name)"
+        >
+          <div class="tag-item tag-default">
+            <span class="title">{{ item.name }}</span>
+            <span>({{ item.useNum }})</span>
           </div>
         </li>
       </ul>
@@ -29,74 +54,97 @@
 </template>
 
 <script>
-import http from '@/http'
-import config from '@/config'
-import Aplayer from 'vue-aplayer'
+import http from "@/http";
+import config from "@/config";
+import "aplayer/dist/APlayer.min.css";
+import APlayer from "aplayer";
+
 export default {
-  components: {
-    Aplayer
-  },
   data() {
     return {
       hotArticle: [],
-      avatar: config.cdn + '/image/default_avatar.jpg',
-      music: {
-        title: '猎户星座',
-        artist: '朴树',
-        src: config.cdn + 'audio/lhxz.mp3',
-        pic: config.cdn + 'audio/lhxz.jpg'
-      },
-      musicList:[{
-        title: '猎户星座',
-        artist: '朴树',
-        src: config.cdn + 'audio/lhxz.mp3',
-        pic: config.cdn + 'audio/lhxz.jpg'
-      },
-      {
-        title: '清白之年',
-        artist: '朴树',
-        src: config.cdn + 'audio/qingbaizhinian.mp3',
-        pic: config.cdn + 'audio/lhxz.jpg'
-      },
-      {
-        title: 'Last Smile',
-        artist: 'LOVE PSYCHEDELICO',
-        src: config.cdn + 'audio/last_smile.mp3',
-        pic: config.cdn + 'audio/last_smile.jpg'
-      },
-      {
-        title: 'Pity in Her Eyes',
-        artist: '高橋諒',
-        src: config.cdn + 'audio/pity_in_her_eyes.mp3',
-        pic: config.cdn + 'audio/pity_in_her_eyes.jpg'
-      }]
-    }
+      hotTag: [],
+      avatar: `${config.cdn}/image/default_avatar.jpg`,
+      ap: null,
+    };
   },
-  created(){
-    this.getHotArticle()
+  created() {
+    this.getHotArticle();
+    this.getHotTag();
+  },
+  mounted() {
+    this.initMusic();
   },
   methods: {
-    async getHotArticle(){
-      const res = await http.getHotArticle()
-      this.hotArticle = res.data.data
+    initMusic() {
+      this.ap = new APlayer({
+        container: document.getElementById("aplayer"),
+        autoplay: true,
+        mutex: true,
+        audio: [
+          {
+            name: "猎户星座",
+            artist: "朴树",
+            url: `${config.cdn}audio/lhxz.mp3`,
+            cover: `${config.cdn}audio/lhxz.jpg`,
+          },
+          {
+            name: "清白之年",
+            artist: "朴树",
+            url: `${config.cdn}audio/qingbaizhinian.mp3`,
+            cover: `${config.cdn}audio/lhxz.jpg`,
+          },
+          {
+            name: "Last Smile",
+            artist: "LOVE PSYCHEDELICO",
+            url: `${config.cdn}audio/last_smile.mp3`,
+            cover: `${config.cdn}audio/last_smile.jpg`,
+          },
+          {
+            name: "Pity in Her Eyes",
+            artist: "高橋諒",
+            url: `${config.cdn}audio/pity_in_her_eyes.mp3`,
+            cover: `${config.cdn}audio/pity_in_her_eyes.jpg`,
+          },
+        ],
+      });
+    },
+    async getHotArticle() {
+      const res = await http.getHotArticle();
+      this.hotArticle = res.data.data;
     },
     toArticle(id) {
-      this.$router.push({name: 'articleContent', params: { article_id: id }})
-    }
-  }
-}
+      this.$router.push({ name: "articleContent", params: { article_id: id } });
+    },
+    getHotTag() {
+      http.getHotTag().then((res) => {
+        this.hotTag = res.data.data;
+      });
+    },
+    findArticalByTag(tag) {
+      console.log(tag);
+    },
+  },
+};
 </script>
 
 <style lang="scss" scoped>
-@import '../style/variable.scss';
-.block{
+@import "../style/variable.scss";
+
+.side-bar {
+  width: 300px;
+}
+.block {
   padding: 30px;
   background: #fff;
   margin-bottom: 30px;
 }
-.sub-title{
-  &::after{
-    content:"";
+
+.sub-title {
+  margin-bottom: 10px;
+  border-bottom: 1px solid $border;
+  &::after {
+    content: "";
     display: block;
     margin-top: 5px;
     height: 2px;
@@ -104,51 +152,87 @@ export default {
     background: #000;
   }
 }
-.info{
+
+.info {
   text-align: center;
-  img{
+
+  img {
     width: 100px;
     border-radius: 50%;
   }
-  h4{
+
+  h4 {
     font-size: 18px;
     margin: 10px auto;
   }
-  p{
+
+  p {
     color: $light-text;
   }
-  div{
+
+  div {
     width: 50%;
     margin: 10px auto;
     padding: 10px;
-    border-top: 1px solid $border;
-    a{
+
+    a {
       color: #000;
       margin: 0 5px;
-      i{
+
+      i {
         font-size: 24px;
       }
     }
   }
 }
-.hot-list{
-  li{
+
+.hot-list {
+  li {
     display: block;
-    padding: 10px 5px;
-    border-top: 1px solid $border;
+    padding: 0 5px 5px;
+    margin-bottom: 15px;
+    border-bottom: 1px solid $border;
     cursor: pointer;
-    p{
-      margin-top: 10px;
-      font-size: 12px;
-      color: #999;
+    &:last-child {
+      border-bottom: none;
+    }
+    .text {
+      .title {
+        color: $title;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+      .desc {
+        margin-top: 6px;
+        font-size: 12px;
+        color: $desc;
+      }
     }
   }
 }
-.music{
+
+.music {
   background: #fff;
   padding: 1px;
-  .aplayer{
+
+  .aplayer {
     box-shadow: none;
+  }
+}
+.tag-list {
+  display: flex;
+  flex-wrap: wrap;
+  .tag-item {
+    font-size: 12px;
+    padding: 3px 6px;
+    margin: 0 10px 10px 0;
+    border-radius: 50px;
+    cursor: pointer;
+  }
+  .tag-default {
+    border: 1px solid $desc;
+    color: $desc;
   }
 }
 </style>

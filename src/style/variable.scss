@@ -3,9 +3,6 @@ $background: #eee;
 $tag-color: #fdd07c;
 $button: #7bb5f8;
 $title: #444;
-$light-text:#bbb;
-
-// mixin
-@mixin navActive{
-  color: rgb(46, 222, 253);
-}
+$desc: #999;
+$light-text: #bbb;
+$app-width: 1400px;
