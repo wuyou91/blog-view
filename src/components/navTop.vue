@@ -12,7 +12,7 @@
           >
             {{ item.name }}
           </li>
-          <li><a href="http://www.yancx.cn/demo">项目</a></li>
+          <li><a href="http://classical.yancx.cn/demo">项目</a></li>
         </ul>
       </div>
     </div>

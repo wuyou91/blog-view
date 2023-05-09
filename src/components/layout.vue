@@ -11,7 +11,7 @@
 
 <script>
 import sideBar from "./sideBar.vue";
-
+import router from "@/router/module/children";
 export default {
   components: {
     sideBar,

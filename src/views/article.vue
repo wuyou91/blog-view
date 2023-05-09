@@ -5,11 +5,12 @@
 </template>
 
 <script>
-import articleList from '../components/articleList.vue'
+import articleList from "../components/articleList.vue";
 
 export default {
+  name: "article",
   components: {
-    articleList
-  }
-}
+    articleList,
+  },
+};
 </script>

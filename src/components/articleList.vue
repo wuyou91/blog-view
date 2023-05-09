@@ -79,6 +79,21 @@ export default {
       this.$router.push({ name: "articleContent", params: { article_id: id } });
     },
   },
+  mounted() {
+    window.addEventListener("scroll", () => {
+      if (this.more !== "加载中...") {
+        const scrollTop =
+          document.documentElement.scrollTop || document.body.scrollTop;
+        if (
+          scrollTop + document.body.clientHeight >=
+          document.body.scrollHeight - 200
+        ) {
+          this.getArticle();
+          this.more = "加载中...";
+        }
+      }
+    });
+  },
 };
 </script>
 

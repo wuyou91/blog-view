@@ -4,7 +4,7 @@
       <img :src="avatar" alt="" />
       <h4>乌酉Ryan</h4>
       <p>惜时，慎独。</p>
-      <div>
+      <div class="icon-list">
         <a href="mailto:ycx1991@live.com"
           ><i class="iconfont icon-mail4"></i
         ></a>
@@ -13,8 +13,11 @@
           ><i class="iconfont icon-weibo-circle"></i
         ></a>
       </div>
-      <router-link to="/about" style="font-size: 12px; color: #999"
-        >了解更多</router-link
+      <a
+        href="//admin.yancx.cn"
+        target="_blank"
+        style="font-size: 14px; color: #2edefd"
+        >访问管理后台</a
       >
     </div>
     <div class="block hs music">
@@ -157,30 +160,31 @@ export default {
   text-align: center;
 
   img {
-    width: 100px;
+    width: 150px;
     border-radius: 50%;
   }
 
   h4 {
-    font-size: 18px;
-    margin: 10px auto;
+    font-size: 20px;
+    margin: 10px auto 0;
   }
 
   p {
+    font-size: 14px;
     color: $light-text;
   }
 
-  div {
+  .icon-list {
     width: 50%;
-    margin: 10px auto;
-    padding: 10px;
+    margin: 10px auto 5px;
+    padding: 5px 10px;
 
     a {
       color: #000;
       margin: 0 5px;
 
       i {
-        font-size: 24px;
+        font-size: 28px;
       }
     }
   }
