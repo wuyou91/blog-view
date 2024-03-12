@@ -3,7 +3,9 @@
     <p>访客统计 {{ visitorCount }}</p>
     <p>
       Copyright ©{{ years }} yancx.cn 版权所有
-      <a href="http://www.miitbeian.gov.cn/">粤ICP备19032467号</a>
+      <a href="https://beian.miit.gov.cn/" target="_blank"
+        >粤ICP备19032467号-1</a
+      >
     </p>
     <p>
       感谢 <a href="https://www.qiniu.com/">七牛云</a> 提供对象存储和CDN服务
