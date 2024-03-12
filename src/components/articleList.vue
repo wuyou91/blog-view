@@ -31,6 +31,7 @@
         </div>
       </li>
     </ul>
+    <pagination total=100, pageSize=10 currentChange="currentChange" />
     <div class="nomore" @click="addMoreArticle">{{ more }}</div>
   </div>
 </template>
@@ -38,6 +39,7 @@
 <script>
 import http from "@/http";
 import config from "@/config";
+import pagination from '@/components'
 
 export default {
   data() {
@@ -50,10 +52,16 @@ export default {
       imgBase: `${config.cdn}/`,
     };
   },
+  components: {
+    pagination
+  },
   created() {
     this.getArticle();
   },
   methods: {
+    currentChange(val) {
+      console.log(val)
+    },
     async getArticle() {
       const parameter = {
         page: this.page,
